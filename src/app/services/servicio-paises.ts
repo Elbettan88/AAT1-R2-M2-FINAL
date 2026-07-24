@@ -10,7 +10,7 @@ export class ServicioPaises {
   private http = inject(HttpClient);
   private apiUrl = '/api/countries/v5';
   // Actualizado con el token exacto provisto por el usuario
-  private token = 'rc_live_e4a6ea15c5f5417fbd53433f61d843ec';
+  private token = 'rc_live_0f9a757f945c4fab9ae7163df3179793';
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
