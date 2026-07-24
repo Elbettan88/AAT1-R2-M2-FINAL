@@ -1,18 +1,13 @@
-<p>navbar works!</p>
-
-<div>
-    icono
-</div>
-<ul class="menu">
-        <li>
-            <a routerLink="/">Home</a>
-        </li>
-
-         <li>
-            <a routerLink="/PageListaPaises">Page Lista de paises</a>
-        </li>
-        <li>
-            <a routerLink="/AcercaDe">Acerca de</a>
-        </li>
-</ul>
-<hr>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/" class="brand-link">
+      <span class="brand-icon">🌍</span>
+      <span class="brand-name">WorldExplorer</span>
+    </a>
+  </div>
+  <ul class="navbar-links">
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Inicio</a></li>
+    <li><a routerLink="/PageListaPaises" routerLinkActive="active">Países</a></li>
+    <li><a routerLink="/AcercaDe" routerLinkActive="active">Acerca de</a></li>
+  </ul>
+</nav>

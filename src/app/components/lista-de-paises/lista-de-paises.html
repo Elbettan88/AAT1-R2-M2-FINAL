@@ -1,4 +1,17 @@
-<p>lista-de-paises works! component</p>
-
-
-<app-tarjeta-de-paises></app-tarjeta-de-paises>
+@if (cargando()) {
+  <div class="loading">
+    <div class="spinner"></div>
+    <p>Cargando países...</p>
+  </div>
+} @else if (error()) {
+  <div class="error">
+    <p>⚠️ No se encontraron resultados.</p>
+  </div>
+} @else {
+  <p class="results-count">{{ paises().length }} países encontrados</p>
+  <div class="grid">
+    @for (pais of paises(); track pais.cca3) {
+      <app-tarjeta-de-paises [pais]="pais" />
+    }
+  </div>
+}

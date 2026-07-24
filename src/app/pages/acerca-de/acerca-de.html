@@ -1,54 +1,71 @@
-<p>acerca-de works!</p>
-
-<section class="acerca-de">
-
-  <h1>Acerca de Nosotros</h1>
-
-  <div >
-    <h2>Integrantes del grupo</h2>
-
-    <ul>
-      <li>Nombre integrante 1</li>
-      <li>Nombre integrante 2</li>
-      <li>Nombre integrante 3</li>
-      <li>Nombre integrante 4</li>
-    </ul>
+<div class="acerca-container">
+  <div class="acerca-hero">
+    <h1>Acerca de Nosotros</h1>
+    <p>Conoce al equipo detrás de WorldExplorer</p>
   </div>
 
-  <div >
-    <h2>Descripción del proyecto</h2>
+  <div class="acerca-content">
 
-    <p>
-       escribir una descripción clara del proyecto, 
-      , cómo funciona.
-    </p>
+    <section class="card-section">
+      <h2>👥 Integrantes del grupo</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">👩‍💻</div>
+          <h3>Integrante 1</h3>
+          <p>Desarrolladora</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">👨‍💻</div>
+          <h3>Integrante 2</h3>
+          <p>Desarrollador</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">👩‍💻</div>
+          <h3>Integrante 3</h3>
+          <p>Desarrolladora</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">👨‍💻</div>
+          <h3>Integrante 4</h3>
+          <p>Desarrollador</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card-section">
+      <h2>📋 Descripción del proyecto</h2>
+      <p class="description">
+        <strong>WorldExplorer</strong> es una aplicación web que permite explorar
+        información detallada de los 195 países del mundo. Los usuarios pueden buscar
+        países por nombre, filtrar por región y ver detalles como capital, población,
+        idiomas, moneda y ubicación en el mapa.
+      </p>
+    </section>
+
+    <section class="card-section">
+      <h2>🛠️ Tecnologías utilizadas</h2>
+      <div class="tech-grid">
+        <div class="tech-badge angular">Angular 21</div>
+        <div class="tech-badge html">HTML5</div>
+        <div class="tech-badge css">CSS3</div>
+        <div class="tech-badge ts">TypeScript</div>
+      </div>
+    </section>
+
+    <section class="card-section api-section">
+      <h2>🌐 API utilizada</h2>
+      <div class="api-info">
+        <div class="api-header">
+          <span class="api-badge">REST API</span>
+          <h3>REST Countries</h3>
+        </div>
+        <p>Proporciona datos actualizados de 195 países: nombre, capital, región, subregión, población, área, banderas, idiomas, monedas, zonas horarias y más.</p>
+        <p class="api-endpoint">
+          <strong>Endpoint:</strong>
+          <a href="https://restcountries.com/v3.1" target="_blank">https://restcountries.com/v3.1</a>
+        </p>
+      </div>
+    </section>
+
   </div>
-
-  <div >
-    <h2>Tecnologías utilizadas</h2>
-
-    <ul>
-      <li>Angular</li>
-      <li>HTML</li>
-      <li>CSS</li>
-      <li>TypeScript</li>
-    </ul>
-  </div>
-
-  <div >
-    <h2>API utilizada</h2>
-
-    <p>
-      Nombre de la API: ________
-    </p>
-
-    <p>
-      Descripción: Aquí explicar qué datos  proporciona la API y cómo se usa.
-    </p>
-
-    <p>
-      Endpoint: https://api.ejemplo.com
-    </p>
-  </div>
-
-</section>
+</div>

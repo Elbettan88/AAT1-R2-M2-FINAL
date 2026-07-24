@@ -1,11 +1,23 @@
-<p>page-lista-paises works!</p>
-<label for="buscar-pais">¿Qué país quieres buscar?</label>
+<div class="page-container">
+  <div class="page-header">
+    <h1>🌍 Explorador de Países</h1>
+    <p>Busca entre 195 países del mundo</p>
+  </div>
 
-<input 
-  type="text" 
-  id="buscar-pais"
-  name="buscar-pais"
-  placeholder="Ej: Guatemala, México, Japón"
-  aria-label="Buscar país">
+  <div class="search-bar">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      [(ngModel)]="termino"
+      (keyup.enter)="buscar()"
+      placeholder="Buscar país... ej: México, Francia, Japón"
+      class="search-input"
+    />
+    @if (termino) {
+      <button class="btn-clear" (click)="limpiar()">✕</button>
+    }
+    <button class="btn-buscar" (click)="buscar()">Buscar</button>
+  </div>
 
-<app-lista-de-paises></app-lista-de-paises>
+  <app-lista-de-paises [busqueda]="busquedaActiva()" />
+</div>

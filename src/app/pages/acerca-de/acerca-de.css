@@ -1,0 +1,98 @@
+.acerca-container { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+.acerca-hero {
+  background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  color: white;
+  text-align: center;
+  padding: 64px 32px;
+}
+
+.acerca-hero h1 { font-size: 40px; font-weight: 800; margin: 0 0 12px; }
+.acerca-hero p { font-size: 18px; opacity: 0.85; margin: 0; }
+
+.acerca-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.card-section {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+
+.card-section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 24px;
+}
+
+/* Team */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.team-card {
+  text-align: center;
+  padding: 24px 16px;
+  border: 2px solid #e0e4ef;
+  border-radius: 12px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.team-card:hover {
+  border-color: #1a73e8;
+  transform: translateY(-3px);
+}
+
+.team-avatar { font-size: 40px; margin-bottom: 10px; }
+.team-card h3 { font-size: 15px; font-weight: 700; margin: 0 0 4px; color: #1a1a2e; }
+.team-card p { font-size: 12px; color: #888; margin: 0; }
+
+/* Description */
+.description {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  margin: 0;
+}
+
+/* Tech */
+.tech-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.tech-badge {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+}
+
+.angular { background: #dd1b16; }
+.html    { background: #e44d26; }
+.css     { background: #264de4; }
+.ts      { background: #3178c6; }
+
+/* API */
+.api-info { background: #f4f6fb; border-radius: 12px; padding: 24px; }
+.api-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.api-badge {
+  background: #1a73e8;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.api-header h3 { margin: 0; font-size: 18px; color: #1a1a2e; }
+.api-info p { color: #555; font-size: 14px; line-height: 1.6; margin: 8px 0; }
+.api-endpoint a { color: #1a73e8; text-decoration: none; }
+.api-endpoint a:hover { text-decoration: underline; }
