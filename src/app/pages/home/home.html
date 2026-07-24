@@ -1,24 +1,135 @@
-<p>home works!</p>
-<header>
-  <h1>Nombre del Proyecto</h1>
-</header>
+<div class="home-container">
 
-<main>
-  <section>
-    <h2>Descripción del sitio</h2>
-
-    <p>
-      Este sitio web ofrece una plataforma interactiva donde los usuarios pueden
-      explorar información relevante sobre distintos países, incluyendo datos
-      culturales, geográficos y sociales. Nuestro objetivo es brindar contenido
-      claro, útil y actualizado para mejorar la experiencia de aprendizaje y
-      navegación.
-    </p>
-
-    <img 
-      src="#" 
-      alt="Banner principal del sitio mostrando información de países"
-      title="Explora información de países"
-    >
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">🌍 Explorador de Países</span>
+      <h1>Descubre el Mundo</h1>
+      <p class="hero-subtitle">
+        Explora información detallada de más de <strong>195 países</strong>:
+        población, banderas, idiomas, capitales y mucho más.
+      </p>
+      <div class="hero-actions">
+        <a routerLink="/lista-de-paises" class="btn btn-primary">
+          🔍 Explorar Países
+        </a>
+        <a routerLink="/acerca-de" class="btn btn-secondary">
+          Acerca del proyecto
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">195</span>
+          <span class="stat-label">Países</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">8B+</span>
+          <span class="stat-label">Habitantes</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">7</span>
+          <span class="stat-label">Continentes</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">195</span>
+          <span class="stat-label">Banderas</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="globe-wrapper">
+        <div class="globe">🌐</div>
+        <div class="orbit orbit-1"><span>🇫🇷</span></div>
+        <div class="orbit orbit-2"><span>🇯🇵</span></div>
+        <div class="orbit orbit-3"><span>🇧🇷</span></div>
+        <div class="orbit orbit-4"><span>🇮🇳</span></div>
+      </div>
+    </div>
   </section>
-</main>
+
+  <!-- SEARCH SECTION -->
+  <section class="search-section">
+    <h2>¿Qué país quieres conocer hoy?</h2>
+    <p>Busca por nombre, capital o región</p>
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        placeholder="Buscar un país... ej: México, Francia, Japón"
+        class="search-input"
+      />
+      <button class="search-btn">Buscar</button>
+    </div>
+  </section>
+
+  <!-- REGIONS SECTION -->
+  <section class="regions-section">
+    <h2>Explorar por Región</h2>
+    <p class="section-subtitle">Selecciona una región para ver todos sus países</p>
+    <div class="regions-grid">
+      @for (region of regions; track region.name) {
+        <div class="region-card">
+          <div class="region-icon">{{ region.icon }}</div>
+          <h3>{{ region.name }}</h3>
+          <p>{{ region.countries }} países</p>
+          <span class="region-arrow">→</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- FEATURED COUNTRIES -->
+  <section class="featured-section">
+    <h2>Países Destacados</h2>
+    <p class="section-subtitle">Algunos de los países más visitados de nuestra app</p>
+    <div class="countries-grid">
+      @for (country of featuredCountries; track country.code) {
+        <div class="country-card">
+          <div class="country-flag">{{ country.flag }}</div>
+          <div class="country-info">
+            <h3>{{ country.name }}</h3>
+            <p class="country-capital">🏛️ {{ country.capital }}</p>
+            <p class="country-population">👥 {{ country.population }}</p>
+            <span class="country-region">{{ country.region }}</span>
+          </div>
+          <a routerLink="/lista-de-paises" class="country-link">Ver más →</a>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- CURIOSITIES SECTION -->
+  <section class="curiosities-section">
+    <h2>¿Sabías que...?</h2>
+    <div class="curiosities-grid">
+      <div class="curiosity-card curiosity-blue">
+        <div class="curiosity-icon">🏔️</div>
+        <p>Nepal alberga el <strong>Monte Everest</strong>, la montaña más alta del mundo con 8,848 metros.</p>
+      </div>
+      <div class="curiosity-card curiosity-red">
+        <div class="curiosity-icon">🗺️</div>
+        <p>Rusia es el país más grande del mundo, cubriendo <strong>11 zonas horarias</strong> distintas.</p>
+      </div>
+      <div class="curiosity-card curiosity-yellow">
+        <div class="curiosity-icon">👥</div>
+        <p>India superó a China como el país más poblado del mundo con más de <strong>1.4 mil millones</strong> de personas.</p>
+      </div>
+      <div class="curiosity-card curiosity-green">
+        <div class="curiosity-icon">🌊</div>
+        <p>Australia es el único país que es también un continente completo, rodeado por <strong>3 océanos</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>¡Empieza tu viaje ahora!</h2>
+      <p>Explora todos los países del mundo con información actualizada y detallada.</p>
+      <a routerLink="/lista-de-paises" class="btn btn-primary btn-large">
+        Ver todos los países 🌍
+      </a>
+    </div>
+  </section>
+
+</div>
