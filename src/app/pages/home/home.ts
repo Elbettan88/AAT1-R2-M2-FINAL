@@ -5,6 +5,7 @@ import { ModeloPaises } from '../../models/modelo-paises';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
@@ -16,11 +17,11 @@ export class Home implements OnInit {
   cargando = signal(true);
 
   regions = [
-    { name: 'Africa', label: 'África', icon: '🌍', countries: 54 },
-    { name: 'Americas', label: 'América', icon: '🌎', countries: 35 },
-    { name: 'Asia', label: 'Asia', icon: '🌏', countries: 48 },
-    { name: 'Europe', label: 'Europa', icon: '🏰', countries: 44 },
-    { name: 'Oceania', label: 'Oceanía', icon: '🏝️', countries: 14 },
+    { name: 'Africa', label: 'África', countries: 54 },
+    { name: 'Americas', label: 'América', countries: 35 },
+    { name: 'Asia', label: 'Asia', countries: 48 },
+    { name: 'Europe', label: 'Europa', countries: 44 },
+    { name: 'Oceania', label: 'Oceanía', countries: 14 },
   ];
 
   ngOnInit() {

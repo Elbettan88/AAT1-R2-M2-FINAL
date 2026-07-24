@@ -3,7 +3,7 @@
   <!-- HERO SECTION -->
   <section class="hero">
     <div class="hero-content">
-      <span class="hero-badge">🌍 Explorador de Países</span>
+      <span class="hero-badge">Explorador de Países</span>
       <h1>Descubre el Mundo</h1>
       <p class="hero-subtitle">
         Explora información detallada de más de <strong>195 países</strong>:
@@ -11,7 +11,7 @@
       </p>
       <div class="hero-actions">
         <a routerLink="/PageListaPaises" class="btn btn-primary">
-          🔍 Explorar Países
+          Explorar Países
         </a>
         <a routerLink="/AcercaDe" class="btn btn-secondary">
           Acerca del proyecto
@@ -38,11 +38,11 @@
     </div>
     <div class="hero-image">
       <div class="globe-wrapper">
-        <div class="globe">🌐</div>
-        <div class="orbit orbit-1"><span>🇫🇷</span></div>
-        <div class="orbit orbit-2"><span>🇯🇵</span></div>
-        <div class="orbit orbit-3"><span>🇧🇷</span></div>
-        <div class="orbit orbit-4"><span>🇮🇳</span></div>
+        <div class="globe-placeholder"></div>
+        <div class="orbit orbit-1"><span class="flag-icon-orbit AS"></span></div>
+        <div class="orbit orbit-2"><span class="flag-icon-orbit FR"></span></div>
+        <div class="orbit orbit-3"><span class="flag-icon-orbit JP"></span></div>
+        <div class="orbit orbit-4"><span class="flag-icon-orbit BR"></span></div>
       </div>
     </div>
   </section>
@@ -54,7 +54,7 @@
     <div class="regions-grid">
       @for (region of regions; track region.name) {
         <a [routerLink]="['/PageListaPaises']" class="region-card">
-          <div class="region-icon">{{ region.icon }}</div>
+          <div class="region-image-container {{region.name}}"></div>
           <h3>{{ region.label }}</h3>
           <p>{{ region.countries }} países</p>
           <span class="region-arrow">→</span>
@@ -75,22 +75,22 @@
       </div>
     } @else {
       <div class="countries-grid">
-        @for (pais of paisesDestacados(); track pais.cca3) {
-          <div class="country-card">
+        @for (pais of paisesDestacados(); track pais.codes.alpha_3) {
+          <div class="country-card" [routerLink]="['/pais', pais.codes.alpha_3]">
             <div class="country-flag-img">
-              <img [src]="pais.flags.png" [alt]="pais.flags.alt || pais.name.common" />
+              <img [src]="pais.flag.url_png" [alt]="pais.name.common" />
             </div>
             <div class="country-info">
               <h3>{{ pais.name.common }}</h3>
               <p class="country-capital">
-                🏛️ {{ pais.capital?.[0] ?? 'Sin capital' }}
+                Capital: {{ pais.capitals?.[0]?.name ?? 'Sin capital' }}
               </p>
               <p class="country-population">
-                👥 {{ formatPoblacion(pais.population) }} hab.
+                Población: {{ formatPoblacion(pais.population) }} hab.
               </p>
               <span class="country-region">{{ pais.region }}</span>
             </div>
-            <a routerLink="/PageListaPaises" class="country-link">Ver más →</a>
+            <a [routerLink]="['/pais', pais.codes.alpha_3]" class="country-link">Ver más</a>
           </div>
         }
       </div>
@@ -102,20 +102,28 @@
     <h2>¿Sabías que...?</h2>
     <div class="curiosities-grid">
       <div class="curiosity-card curiosity-blue">
-        <div class="curiosity-icon">🏔️</div>
-        <p>Nepal alberga el <strong>Monte Everest</strong>, la montaña más alta del mundo con 8,848 metros.</p>
+        <div class="curiosity-img mount-everest"></div>
+        <div class="curiosity-content">
+          <p>Nepal alberga el <strong>Monte Everest</strong>, la montaña más alta del mundo con 8,848 metros.</p>
+        </div>
       </div>
       <div class="curiosity-card curiosity-red">
-        <div class="curiosity-icon">🗺️</div>
-        <p>Rusia es el país más grande del mundo, cubriendo <strong>11 zonas horarias</strong> distintas.</p>
+        <div class="curiosity-img russia-map"></div>
+        <div class="curiosity-content">
+          <p>Rusia es el país más grande del mundo, cubriendo <strong>11 zonas horarias</strong> distintas.</p>
+        </div>
       </div>
       <div class="curiosity-card curiosity-yellow">
-        <div class="curiosity-icon">👥</div>
-        <p>India superó a China como el país más poblado del mundo con más de <strong>1.4 mil millones</strong> de personas.</p>
+        <div class="curiosity-img population-india"></div>
+        <div class="curiosity-content">
+          <p>India superó a China como el país más poblado del mundo con más de <strong>1.4 mil millones</strong> de personas.</p>
+        </div>
       </div>
       <div class="curiosity-card curiosity-green">
-        <div class="curiosity-icon">🌊</div>
-        <p>Australia es el único país que es también un continente completo, rodeado por <strong>3 océanos</strong>.</p>
+        <div class="curiosity-img australia-ocean"></div>
+        <div class="curiosity-content">
+          <p>Australia es el único país que es también un continente completo, rodeado por <strong>3 océanos</strong>.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -126,7 +134,7 @@
       <h2>¡Empieza tu viaje ahora!</h2>
       <p>Explora todos los países del mundo con información actualizada y detallada.</p>
       <a routerLink="/PageListaPaises" class="btn btn-primary btn-large">
-        Ver todos los países 🌍
+        Ver todos los países
       </a>
     </div>
   </section>

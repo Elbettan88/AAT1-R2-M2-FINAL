@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 import { ModeloPaises } from '../models/modelo-paises';
 
 @Injectable({
@@ -8,34 +8,59 @@ import { ModeloPaises } from '../models/modelo-paises';
 })
 export class ServicioPaises {
   private http = inject(HttpClient);
-  private apiUrl = 'https://restcountries.com/v3.1';
+  private apiUrl = '/api/countries/v5';
+  private token = 'rc_live_0f9a757f945c4fab9ae7163df3179793';
 
-  // Obtener todos los países
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+  }
+
   getTodos(): Observable<ModeloPaises[]> {
-    return this.http.get<ModeloPaises[]>(
-      `${this.apiUrl}/all?fields=name,capital,region,population,flags,cca3`
+    return this.http.get<{ data: ModeloPaises[] }>(
+      `${this.apiUrl}?limit=250&fields=name,capitals,region,population,flag,codes`,
+      { headers: this.getHeaders() }
+    ).pipe(
+      map(res => res.data)
     );
   }
 
-  // Buscar por nombre
   buscarPorNombre(nombre: string): Observable<ModeloPaises[]> {
-    return this.http.get<ModeloPaises[]>(
-      `${this.apiUrl}/name/${nombre}?fields=name,capital,region,population,flags,cca3`
+    return this.http.get<{ data: ModeloPaises[] }>(
+      `${this.apiUrl}?q=${nombre}&fields=name,capitals,region,population,flag,codes`,
+      { headers: this.getHeaders() }
+    ).pipe(
+      map(res => res.data)
     );
   }
 
-  // Buscar por región
   buscarPorRegion(region: string): Observable<ModeloPaises[]> {
-    return this.http.get<ModeloPaises[]>(
-      `${this.apiUrl}/region/${region}?fields=name,capital,region,population,flags,cca3`
+    return this.http.get<{ data: ModeloPaises[] }>(
+      `${this.apiUrl}?region=${region}&limit=250&fields=name,capitals,region,population,flag,codes`,
+      { headers: this.getHeaders() }
+    ).pipe(
+      map(res => res.data)
     );
   }
 
-  // Obtener países destacados por código
   getPaisesDestacados(): Observable<ModeloPaises[]> {
     const codigos = 'MEX,FRA,JPN,BRA,ZAF,AUS';
-    return this.http.get<ModeloPaises[]>(
-      `${this.apiUrl}/alpha?codes=${codigos}&fields=name,capital,region,population,flags,cca3`
+    return this.http.get<{ data: ModeloPaises[] }>(
+      `${this.apiUrl}?codes=${codigos}&fields=name,capitals,region,population,flag,codes`,
+      { headers: this.getHeaders() }
+    ).pipe(
+      map(res => res.data)
+    );
+  }
+
+  // Obtener un país detallado por su código alpha_3
+  getPorCodigo(codigo: string): Observable<ModeloPaises> {
+    return this.http.get<{ data: ModeloPaises }>(
+      `${this.apiUrl}/${codigo}?fields=name,capitals,region,subregion,population,flag,codes,area,languages,currencies,continents,borders,classification,links`,
+      { headers: this.getHeaders() }
+    ).pipe(
+      map(res => res.data)
     );
   }
 }
