@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import { ModeloPaises } from '../models/modelo-paises';
 
 // Estructura real que devuelve la API v5
@@ -14,9 +14,6 @@ interface ApiV5Response {
   };
 }
 
-interface ApiV5Single {
-  data: ModeloPaises;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -60,13 +57,15 @@ export class ServicioPaises {
   }
 
   getPaisesDestacados(): Observable<ModeloPaises[]> {
-    const codigos = 'MEX,FRA,JPN,BRA,ZAF,AUS';
-    return this.http.get<ApiV5Response>(
-      `${this.apiUrl}?codes=${codigos}&fields=names,capitals,region,population,flag,codes`,
-      { headers: this.getHeaders() }
-    ).pipe(
-      map(res => res.data.objects)
+    // Buscamos cada país destacado individualmente y los unimos
+    const nombres = ['Mexico', 'France', 'Japan', 'Brazil', 'South Africa', 'Australia'];
+    const peticiones = nombres.map(nombre =>
+      this.http.get<ApiV5Response>(
+        `${this.apiUrl}?q=${encodeURIComponent(nombre)}&limit=1&fields=names,capitals,region,population,flag,codes`,
+        { headers: this.getHeaders() }
+      ).pipe(map(res => res.data.objects[0]))
     );
+    return forkJoin(peticiones);
   }
 
   getPorCodigo(nombreOCodigo: string): Observable<ModeloPaises> {

@@ -36,7 +36,7 @@
 
 .search-bar:focus-within { border-color: #1a73e8; }
 
-.search-icon { font-size: 18px; opacity: 0.5; margin-right: 10px; }
+.search-icon { width: 20px; height: 20px; opacity: 0.45; margin-right: 10px; flex-shrink: 0; color: #555; }
 
 .search-input {
   flex: 1;

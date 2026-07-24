@@ -92,7 +92,7 @@
           <h2>Países Limítrofes</h2>
           <div class="borders-grid">
             @for (border of pais()?.borders; track border.alpha_3) {
-              <a [routerLink]="['/pais', border.alpha_3]" class="border-card">
+              <a [routerLink]="['/pais', border.common]" class="border-card">
                 <span>{{ border.common }}</span>
               </a>
             }

@@ -54,7 +54,7 @@
     <div class="regions-grid">
       @for (region of regions; track region.name) {
         <a [routerLink]="['/PageListaPaises']" class="region-card">
-          <div class="region-image-container {{region.name}}"></div>
+          <div [class]="'region-image-container ' + region.name"></div>
           <h3>{{ region.label }}</h3>
           <p>{{ region.countries }} países</p>
           <span class="region-arrow">→</span>

@@ -19,7 +19,16 @@
   color: white;
 }
 
-.brand-icon { font-size: 26px; }
+.brand-logo-svg {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #60a5fa, #1d4ed8 60%, #1e3a8a);
+  box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 0 0 2px rgba(255,255,255,0.3);
+  position: relative;
+  flex-shrink: 0;
+}
 
 .brand-name {
   font-size: 20px;
