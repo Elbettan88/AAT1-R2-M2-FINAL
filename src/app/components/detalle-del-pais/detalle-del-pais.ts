@@ -31,7 +31,11 @@ export class DetalleDelPais implements OnInit {
     this.error.set(false);
     this.servicio.getPorCodigo(this.id).subscribe({
       next: (data) => {
-        this.pais.set(data);
+        if (!data) {
+          this.error.set(true);
+        } else {
+          this.pais.set(data);
+        }
         this.cargando.set(false);
       },
       error: () => {

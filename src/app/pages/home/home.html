@@ -10,10 +10,10 @@
         población, banderas, idiomas, capitales y mucho más.
       </p>
       <div class="hero-actions">
-        <a routerLink="/PageListaPaises" class="btn btn-primary">
+        <a routerLink="/lista-paises" class="btn btn-primary">
           Explorar Países
         </a>
-        <a routerLink="/AcercaDe" class="btn btn-secondary">
+        <a routerLink="/acerca-de" class="btn btn-secondary">
           Acerca del proyecto
         </a>
       </div>
@@ -53,7 +53,7 @@
     <p class="section-subtitle">Selecciona una región para ver todos sus países</p>
     <div class="regions-grid">
       @for (region of regions; track region.name) {
-        <a [routerLink]="['/PageListaPaises']" class="region-card">
+        <a [routerLink]="['/lista-paises']" [queryParams]="{region: region.name}" class="region-card">
           <div [class]="'region-image-container ' + region.name"></div>
           <h3>{{ region.label }}</h3>
           <p>{{ region.countries }} países</p>
@@ -133,7 +133,7 @@
     <div class="cta-content">
       <h2>¡Empieza tu viaje ahora!</h2>
       <p>Explora todos los países del mundo con información actualizada y detallada.</p>
-      <a routerLink="/PageListaPaises" class="btn btn-primary btn-large">
+      <a routerLink="/lista-paises" class="btn btn-primary btn-large">
         Ver todos los países
       </a>
     </div>

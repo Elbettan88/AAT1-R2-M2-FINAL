@@ -11,11 +11,11 @@ export const routes: Routes = [
     component: Home,
   },
   {
-    path: 'PageListaPaises',
+    path: 'lista-paises',
     component: PageListaPaises,
   },
   {
-    path: 'AcercaDe',
+    path: 'acerca-de',
     component: AcercaDe,
   },
   {

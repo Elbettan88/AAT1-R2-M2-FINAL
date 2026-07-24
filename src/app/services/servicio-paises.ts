@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable, forkJoin, map, catchError, of } from 'rxjs';
 import { ModeloPaises } from '../models/modelo-paises';
 
 // Estructura real que devuelve la API v5
@@ -13,7 +13,6 @@ interface ApiV5Response {
     };
   };
 }
-
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +39,7 @@ export class ServicioPaises {
 
   buscarPorNombre(nombre: string): Observable<ModeloPaises[]> {
     return this.http.get<ApiV5Response>(
-      `${this.apiUrl}?q=${nombre}&fields=names,capitals,region,population,flag,codes`,
+      `${this.apiUrl}?q=${encodeURIComponent(nombre)}&fields=names,capitals,region,population,flag,codes`,
       { headers: this.getHeaders() }
     ).pipe(
       map(res => res.data.objects)
@@ -49,7 +48,7 @@ export class ServicioPaises {
 
   buscarPorRegion(region: string): Observable<ModeloPaises[]> {
     return this.http.get<ApiV5Response>(
-      `${this.apiUrl}?region=${region}&limit=250&fields=names,capitals,region,population,flag,codes`,
+      `${this.apiUrl}?region=${encodeURIComponent(region)}&limit=250&fields=names,capitals,region,population,flag,codes`,
       { headers: this.getHeaders() }
     ).pipe(
       map(res => res.data.objects)
@@ -57,26 +56,35 @@ export class ServicioPaises {
   }
 
   getPaisesDestacados(): Observable<ModeloPaises[]> {
-    // Buscamos cada país destacado individualmente y los unimos
+    // forkJoin con búsqueda individual por nombre — la API v5 no soporta ?codes=
     const nombres = ['Mexico', 'France', 'Japan', 'Brazil', 'South Africa', 'Australia'];
     const peticiones = nombres.map(nombre =>
       this.http.get<ApiV5Response>(
         `${this.apiUrl}?q=${encodeURIComponent(nombre)}&limit=1&fields=names,capitals,region,population,flag,codes`,
         { headers: this.getHeaders() }
-      ).pipe(map(res => res.data.objects[0]))
+      ).pipe(
+        map(res => res.data.objects[0]),
+        catchError(() => of(null))
+      )
     );
-    return forkJoin(peticiones);
+    return forkJoin(peticiones).pipe(
+      map(results => results.filter((p): p is ModeloPaises => p !== null))
+    );
   }
 
-  getPorCodigo(nombreOCodigo: string): Observable<ModeloPaises> {
+  getPorCodigo(nombreOCodigo: string): Observable<ModeloPaises | null> {
     // La API v5 no tiene endpoint individual por código.
-    // Buscamos por nombre (que viene URL-encoded) y tomamos el primer resultado.
+    // Buscamos por nombre (decodificado de URL) y tomamos el primer resultado.
     const nombre = decodeURIComponent(nombreOCodigo);
     return this.http.get<ApiV5Response>(
       `${this.apiUrl}?q=${encodeURIComponent(nombre)}&fields=names,capitals,region,subregion,population,flag,codes,area,languages,currencies,continents,borders,classification,links`,
       { headers: this.getHeaders() }
     ).pipe(
-      map(res => res.data.objects[0])
+      map(res => {
+        if (!res.data.objects || res.data.objects.length === 0) return null;
+        return res.data.objects[0];
+      }),
+      catchError(() => of(null))
     );
   }
 }
