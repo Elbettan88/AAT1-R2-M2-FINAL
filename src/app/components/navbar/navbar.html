@@ -1,15 +1,13 @@
 <nav class="navbar">
-  <!-- Contenedor del Logo -->
-  <div class="logo-container">
-    <img src="paisesdelmundo.jpg" alt="Logo Países" class="logo-img">
-
-    <span class="logo-text">Países del Mundo</span>
+  <div class="navbar-brand">
+    <a routerLink="/" class="brand-link">
+      <span class="brand-icon">🌍</span>
+      <span class="brand-name">WorldExplorer</span>
+    </a>
   </div>
-
-  <!-- Enlaces de navegación (tus compañeros) -->
-  <ul class="nav-links">
-    <li><a href="#">Inicio</a></li>
-    <li><a href="#">Países</a></li>
-    <li><a href="#">Contacto</a></li>
+  <ul class="navbar-links">
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Inicio</a></li>
+    <li><a routerLink="/PageListaPaises" routerLinkActive="active">Países</a></li>
+    <li><a routerLink="/AcercaDe" routerLinkActive="active">Acerca de</a></li>
   </ul>
 </nav>
