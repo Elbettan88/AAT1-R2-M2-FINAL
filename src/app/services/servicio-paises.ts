@@ -9,7 +9,8 @@ import { ModeloPaises } from '../models/modelo-paises';
 export class ServicioPaises {
   private http = inject(HttpClient);
   private apiUrl = '/api/countries/v5';
-  private token = 'rc_live_0f9a757f945c4fab9ae7163df3179793';
+  // Actualizado con el token exacto provisto por el usuario
+  private token = 'rc_live_e4a6ea15c5f5417fbd53433f61d843ec';
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
@@ -54,7 +55,6 @@ export class ServicioPaises {
     );
   }
 
-  // Obtener un país detallado por su código alpha_3
   getPorCodigo(codigo: string): Observable<ModeloPaises> {
     return this.http.get<{ data: ModeloPaises }>(
       `${this.apiUrl}/${codigo}?fields=name,capitals,region,subregion,population,flag,codes,area,languages,currencies,continents,borders,classification,links`,
