@@ -10,10 +10,10 @@
         población, banderas, idiomas, capitales y mucho más.
       </p>
       <div class="hero-actions">
-        <a routerLink="/lista-de-paises" class="btn btn-primary">
+        <a routerLink="/PageListaPaises" class="btn btn-primary">
           🔍 Explorar Países
         </a>
-        <a routerLink="/acerca-de" class="btn btn-secondary">
+        <a routerLink="/AcercaDe" class="btn btn-secondary">
           Acerca del proyecto
         </a>
       </div>
@@ -47,55 +47,54 @@
     </div>
   </section>
 
-  <!-- SEARCH SECTION -->
-  <section class="search-section">
-    <h2>¿Qué país quieres conocer hoy?</h2>
-    <p>Busca por nombre, capital o región</p>
-    <div class="search-bar">
-      <span class="search-icon">🔍</span>
-      <input
-        type="text"
-        placeholder="Buscar un país... ej: México, Francia, Japón"
-        class="search-input"
-      />
-      <button class="search-btn">Buscar</button>
-    </div>
-  </section>
-
   <!-- REGIONS SECTION -->
   <section class="regions-section">
     <h2>Explorar por Región</h2>
     <p class="section-subtitle">Selecciona una región para ver todos sus países</p>
     <div class="regions-grid">
       @for (region of regions; track region.name) {
-        <div class="region-card">
+        <a [routerLink]="['/PageListaPaises']" class="region-card">
           <div class="region-icon">{{ region.icon }}</div>
-          <h3>{{ region.name }}</h3>
+          <h3>{{ region.label }}</h3>
           <p>{{ region.countries }} países</p>
           <span class="region-arrow">→</span>
-        </div>
+        </a>
       }
     </div>
   </section>
 
-  <!-- FEATURED COUNTRIES -->
+  <!-- FEATURED COUNTRIES desde API -->
   <section class="featured-section">
     <h2>Países Destacados</h2>
-    <p class="section-subtitle">Algunos de los países más visitados de nuestra app</p>
-    <div class="countries-grid">
-      @for (country of featuredCountries; track country.code) {
-        <div class="country-card">
-          <div class="country-flag">{{ country.flag }}</div>
-          <div class="country-info">
-            <h3>{{ country.name }}</h3>
-            <p class="country-capital">🏛️ {{ country.capital }}</p>
-            <p class="country-population">👥 {{ country.population }}</p>
-            <span class="country-region">{{ country.region }}</span>
+    <p class="section-subtitle">Datos en tiempo real desde la API de países</p>
+
+    @if (cargando()) {
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>Cargando países...</p>
+      </div>
+    } @else {
+      <div class="countries-grid">
+        @for (pais of paisesDestacados(); track pais.cca3) {
+          <div class="country-card">
+            <div class="country-flag-img">
+              <img [src]="pais.flags.png" [alt]="pais.flags.alt || pais.name.common" />
+            </div>
+            <div class="country-info">
+              <h3>{{ pais.name.common }}</h3>
+              <p class="country-capital">
+                🏛️ {{ pais.capital?.[0] ?? 'Sin capital' }}
+              </p>
+              <p class="country-population">
+                👥 {{ formatPoblacion(pais.population) }} hab.
+              </p>
+              <span class="country-region">{{ pais.region }}</span>
+            </div>
+            <a routerLink="/PageListaPaises" class="country-link">Ver más →</a>
           </div>
-          <a routerLink="/lista-de-paises" class="country-link">Ver más →</a>
-        </div>
-      }
-    </div>
+        }
+      </div>
+    }
   </section>
 
   <!-- CURIOSITIES SECTION -->
@@ -126,7 +125,7 @@
     <div class="cta-content">
       <h2>¡Empieza tu viaje ahora!</h2>
       <p>Explora todos los países del mundo con información actualizada y detallada.</p>
-      <a routerLink="/lista-de-paises" class="btn btn-primary btn-large">
+      <a routerLink="/PageListaPaises" class="btn btn-primary btn-large">
         Ver todos los países 🌍
       </a>
     </div>

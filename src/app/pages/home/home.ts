@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ServicioPaises } from '../../services/servicio-paises';
+import { ModeloPaises } from '../../models/modelo-paises';
 
 @Component({
   selector: 'app-home',
@@ -7,21 +9,39 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {
+export class Home implements OnInit {
+  private servicioPaises = inject(ServicioPaises);
+
+  paisesDestacados = signal<ModeloPaises[]>([]);
+  cargando = signal(true);
+
   regions = [
-    { name: 'África', icon: '🌍', countries: 54 },
-    { name: 'América', icon: '🌎', countries: 35 },
-    { name: 'Asia', icon: '🌏', countries: 48 },
-    { name: 'Europa', icon: '🏰', countries: 44 },
-    { name: 'Oceanía', icon: '🏝️', countries: 14 },
+    { name: 'Africa', label: 'África', icon: '🌍', countries: 54 },
+    { name: 'Americas', label: 'América', icon: '🌎', countries: 35 },
+    { name: 'Asia', label: 'Asia', icon: '🌏', countries: 48 },
+    { name: 'Europe', label: 'Europa', icon: '🏰', countries: 44 },
+    { name: 'Oceania', label: 'Oceanía', icon: '🏝️', countries: 14 },
   ];
 
-  featuredCountries = [
-    { flag: '🇲🇽', name: 'México', capital: 'Ciudad de México', population: '128 millones', region: 'América', code: 'MEX' },
-    { flag: '🇫🇷', name: 'Francia', capital: 'París', population: '67 millones', region: 'Europa', code: 'FRA' },
-    { flag: '🇯🇵', name: 'Japón', capital: 'Tokio', population: '125 millones', region: 'Asia', code: 'JPN' },
-    { flag: '🇧🇷', name: 'Brasil', capital: 'Brasilia', population: '215 millones', region: 'América', code: 'BRA' },
-    { flag: '🇿🇦', name: 'Sudáfrica', capital: 'Ciudad del Cabo', population: '60 millones', region: 'África', code: 'ZAF' },
-    { flag: '🇦🇺', name: 'Australia', capital: 'Canberra', population: '26 millones', region: 'Oceanía', code: 'AUS' },
-  ];
+  ngOnInit() {
+    this.servicioPaises.getPaisesDestacados().subscribe({
+      next: (paises) => {
+        this.paisesDestacados.set(paises);
+        this.cargando.set(false);
+      },
+      error: () => {
+        this.cargando.set(false);
+      },
+    });
+  }
+
+  formatPoblacion(poblacion: number): string {
+    if (poblacion >= 1_000_000_000) {
+      return (poblacion / 1_000_000_000).toFixed(1) + 'B';
+    }
+    if (poblacion >= 1_000_000) {
+      return (poblacion / 1_000_000).toFixed(0) + 'M';
+    }
+    return poblacion.toLocaleString('es');
+  }
 }
