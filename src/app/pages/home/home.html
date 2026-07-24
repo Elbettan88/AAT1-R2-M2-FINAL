@@ -78,10 +78,10 @@
         @for (pais of paisesDestacados(); track pais.codes.alpha_3) {
           <div class="country-card" [routerLink]="['/pais', pais.codes.alpha_3]">
             <div class="country-flag-img">
-              <img [src]="pais.flag.url_png" [alt]="pais.name.common" />
+              <img [src]="pais.flag.url_png" [alt]="pais.names.common" />
             </div>
             <div class="country-info">
-              <h3>{{ pais.name.common }}</h3>
+              <h3>{{ pais.names.common }}</h3>
               <p class="country-capital">
                 Capital: {{ pais.capitals?.[0]?.name ?? 'Sin capital' }}
               </p>

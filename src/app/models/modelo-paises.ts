@@ -1,5 +1,5 @@
 export interface ModeloPaises {
-  name: {
+  names: {
     common: string;
     official: string;
   };
@@ -11,34 +11,32 @@ export interface ModeloPaises {
     name: string;
   }>;
   region: string;
-  subregion: string;
+  subregion?: string;
   population: number;
-  area: {
+  area?: {
     kilometers: number;
   };
   flag: {
     url_png: string;
     url_svg: string;
-    emoji: string;
   };
-  languages: Array<{
+  languages?: Array<{
     name: string;
   }>;
-  currencies: Array<{
+  currencies?: Array<{
     code: string;
     name: string;
     symbol: string;
   }>;
-  continents: string[];
-  borders: Array<{
+  continents?: string[];
+  borders?: Array<{
     alpha_3: string;
     common: string;
   }>;
-  classification: {
-    dependency: boolean;
+  classification?: {
     un_member: boolean;
   };
-  links: {
+  links?: {
     google_maps: string;
     wikipedia: string;
   };

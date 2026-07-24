@@ -3,13 +3,27 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { ModeloPaises } from '../models/modelo-paises';
 
+// Estructura real que devuelve la API v5
+interface ApiV5Response {
+  data: {
+    objects: ModeloPaises[];
+    meta: {
+      total: number;
+      count: number;
+    };
+  };
+}
+
+interface ApiV5Single {
+  data: ModeloPaises;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ServicioPaises {
   private http = inject(HttpClient);
   private apiUrl = '/api/countries/v5';
-  // Actualizado con el token exacto provisto por el usuario
   private token = 'rc_live_0f9a757f945c4fab9ae7163df3179793';
 
   private getHeaders(): HttpHeaders {
@@ -19,45 +33,45 @@ export class ServicioPaises {
   }
 
   getTodos(): Observable<ModeloPaises[]> {
-    return this.http.get<{ data: ModeloPaises[] }>(
-      `${this.apiUrl}?limit=250&fields=name,capitals,region,population,flag,codes`,
+    return this.http.get<ApiV5Response>(
+      `${this.apiUrl}?limit=250&fields=names,capitals,region,population,flag,codes`,
       { headers: this.getHeaders() }
     ).pipe(
-      map(res => res.data)
+      map(res => res.data.objects)
     );
   }
 
   buscarPorNombre(nombre: string): Observable<ModeloPaises[]> {
-    return this.http.get<{ data: ModeloPaises[] }>(
-      `${this.apiUrl}?q=${nombre}&fields=name,capitals,region,population,flag,codes`,
+    return this.http.get<ApiV5Response>(
+      `${this.apiUrl}?q=${nombre}&fields=names,capitals,region,population,flag,codes`,
       { headers: this.getHeaders() }
     ).pipe(
-      map(res => res.data)
+      map(res => res.data.objects)
     );
   }
 
   buscarPorRegion(region: string): Observable<ModeloPaises[]> {
-    return this.http.get<{ data: ModeloPaises[] }>(
-      `${this.apiUrl}?region=${region}&limit=250&fields=name,capitals,region,population,flag,codes`,
+    return this.http.get<ApiV5Response>(
+      `${this.apiUrl}?region=${region}&limit=250&fields=names,capitals,region,population,flag,codes`,
       { headers: this.getHeaders() }
     ).pipe(
-      map(res => res.data)
+      map(res => res.data.objects)
     );
   }
 
   getPaisesDestacados(): Observable<ModeloPaises[]> {
     const codigos = 'MEX,FRA,JPN,BRA,ZAF,AUS';
-    return this.http.get<{ data: ModeloPaises[] }>(
-      `${this.apiUrl}?codes=${codigos}&fields=name,capitals,region,population,flag,codes`,
+    return this.http.get<ApiV5Response>(
+      `${this.apiUrl}?codes=${codigos}&fields=names,capitals,region,population,flag,codes`,
       { headers: this.getHeaders() }
     ).pipe(
-      map(res => res.data)
+      map(res => res.data.objects)
     );
   }
 
   getPorCodigo(codigo: string): Observable<ModeloPaises> {
-    return this.http.get<{ data: ModeloPaises }>(
-      `${this.apiUrl}/${codigo}?fields=name,capitals,region,subregion,population,flag,codes,area,languages,currencies,continents,borders,classification,links`,
+    return this.http.get<ApiV5Single>(
+      `${this.apiUrl}/${codigo}?fields=names,capitals,region,subregion,population,flag,codes,area,languages,currencies,continents,borders,classification,links`,
       { headers: this.getHeaders() }
     ).pipe(
       map(res => res.data)

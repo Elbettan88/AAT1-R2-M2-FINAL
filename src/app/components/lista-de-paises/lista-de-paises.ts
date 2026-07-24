@@ -33,7 +33,7 @@ export class ListaDePaises implements OnInit, OnChanges {
     this.error.set(false);
     this.servicio.getTodos().subscribe({
       next: (data) => {
-        this.paises.set(data.sort((a, b) => a.name.common.localeCompare(b.name.common)));
+        this.paises.set(data.sort((a, b) => a.names.common.localeCompare(b.names.common)));
         this.cargando.set(false);
       },
       error: () => {
