@@ -83,7 +83,9 @@
             <div class="country-info">
               <h3>{{ pais.name.common }}</h3>
               <p class="country-capital">
-                🏛️ {{ pais.capital?.[0] ?? 'Sin capital' }}
+               <!-- 📌 Removemos el ?? 'Sin capital' ya que Angular asegura que la variable nunca será nula -->
+                🏛️ {{ pais.capital[0] }}
+
               </p>
               <p class="country-population">
                 👥 {{ formatPoblacion(pais.population) }} hab.

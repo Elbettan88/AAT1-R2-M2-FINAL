@@ -1,25 +1,26 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { ModeloPaises } from '../../models/modelo-paises';
+import { DetalleDelPais } from '../detalle-del-pais/detalle-del-pais'; // 📌 Eliminamos el '.component' de la ruta
 
 @Component({
   selector: 'app-tarjeta-de-paises',
-  imports: [],
+  standalone: true,
+  imports: [DetalleDelPais], // 📌 Añadimos el componente en el arreglo de imports
   templateUrl: './tarjeta-de-paises.html',
-  styleUrl: './tarjeta-de-paises.css',
+  styleUrl: './tarjeta-de-paises.css'
 })
-export class TarjetaDePaises {
-  @Input() pais!: ModeloPaises;
-
-  constructor(private router: Router) {}
+export class TarjetaDePaisesComponent { // 📌 Asegúrate de que el nombre sea "TarjetaDePaisesComponent" o el que use tu equipo
+  @Input() pais: any;
+  mostrarModal: boolean = false;
 
   verDetalles() {
-    this.router.navigate(['/pais', this.pais.cca3]);
+    this.mostrarModal = true;
   }
 
-  formatPoblacion(n: number): string {
-    if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + 'B';
-    if (n >= 1_000_000) return (n / 1_000_000).toFixed(0) + 'M';
-    return n.toLocaleString('es');
+  cerrarDetalles() {
+    this.mostrarModal = false;
+  }
+
+  formatPoblacion(poblacion: number): string {
+    return poblacion.toLocaleString();
   }
 }
