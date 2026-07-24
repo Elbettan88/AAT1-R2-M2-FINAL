@@ -87,7 +87,7 @@
         </div>
       </div>
 
-      @if (pais()?.borders && pais()!.borders.length > 0) {
+      @if (pais()?.borders && (pais()?.borders?.length ?? 0) > 0) {
         <div class="borders-section">
           <h2>Países Limítrofes</h2>
           <div class="borders-grid">
