@@ -69,12 +69,15 @@ export class ServicioPaises {
     );
   }
 
-  getPorCodigo(codigo: string): Observable<ModeloPaises> {
-    return this.http.get<ApiV5Single>(
-      `${this.apiUrl}/${codigo}?fields=names,capitals,region,subregion,population,flag,codes,area,languages,currencies,continents,borders,classification,links`,
+  getPorCodigo(nombreOCodigo: string): Observable<ModeloPaises> {
+    // La API v5 no tiene endpoint individual por código.
+    // Buscamos por nombre (que viene URL-encoded) y tomamos el primer resultado.
+    const nombre = decodeURIComponent(nombreOCodigo);
+    return this.http.get<ApiV5Response>(
+      `${this.apiUrl}?q=${encodeURIComponent(nombre)}&fields=names,capitals,region,subregion,population,flag,codes,area,languages,currencies,continents,borders,classification,links`,
       { headers: this.getHeaders() }
     ).pipe(
-      map(res => res.data)
+      map(res => res.data.objects[0])
     );
   }
 }

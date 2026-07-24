@@ -76,7 +76,7 @@
     } @else {
       <div class="countries-grid">
         @for (pais of paisesDestacados(); track pais.codes.alpha_3) {
-          <div class="country-card" [routerLink]="['/pais', pais.codes.alpha_3]">
+          <div class="country-card" [routerLink]="['/pais', pais.names.common]">
             <div class="country-flag-img">
               <img [src]="pais.flag.url_png" [alt]="pais.names.common" />
             </div>
@@ -90,7 +90,7 @@
               </p>
               <span class="country-region">{{ pais.region }}</span>
             </div>
-            <a [routerLink]="['/pais', pais.codes.alpha_3]" class="country-link">Ver más</a>
+            <a [routerLink]="['/pais', pais.names.common]" class="country-link">Ver más</a>
           </div>
         }
       </div>

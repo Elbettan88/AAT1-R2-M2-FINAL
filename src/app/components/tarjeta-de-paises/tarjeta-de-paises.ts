@@ -14,7 +14,7 @@ export class TarjetaDePaises {
   constructor(private router: Router) {}
 
   verDetalles() {
-    this.router.navigate(['/pais', this.pais.codes.alpha_3]);
+    this.router.navigate(['/pais', encodeURIComponent(this.pais.names.common)]);
   }
 
   formatPoblacion(n: number): string {
