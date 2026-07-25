@@ -13,7 +13,11 @@ export class TarjetaDePaisesComponent { // 📌 Asegúrate de que el nombre sea 
   mostrarModal: boolean = false;
 
   verDetalles() {
+<<<<<<< HEAD
     this.mostrarModal = true;
+=======
+    this.router.navigate(['/pais', encodeURIComponent(this.pais.names.common)]);
+>>>>>>> 1c516113e914458aa81cc7855100bf2f627881d4
   }
 
   cerrarDetalles() {

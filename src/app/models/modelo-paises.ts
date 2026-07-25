@@ -1,29 +1,43 @@
 export interface ModeloPaises {
-  name: {
+  names: {
     common: string;
     official: string;
   };
-  capital: string[];
+  codes: {
+    alpha_3: string;
+    alpha_2: string;
+  };
+  capitals: Array<{
+    name: string;
+  }>;
   region: string;
-  subregion: string;
+  subregion?: string;
   population: number;
-  area: number;
-  flags: {
-    png: string;
-    svg: string;
-    alt: string;
+  area?: {
+    kilometers: number;
   };
-  languages: { [key: string]: string };
-  currencies: {
-    [key: string]: {
-      name: string;
-      symbol: string;
-    };
+  flag: {
+    url_png: string;
+    url_svg: string;
   };
-  cca3: string;
-  maps: {
-    googleMaps: string;
+  languages?: Array<{
+    name: string;
+  }>;
+  currencies?: Array<{
+    code: string;
+    name: string;
+    symbol: string;
+  }>;
+  continents?: string[];
+  borders?: Array<{
+    alpha_3: string;
+    common: string;
+  }>;
+  classification?: {
+    un_member: boolean;
   };
-  timezones: string[];
-  continents: string[];
+  links?: {
+    google_maps: string;
+    wikipedia: string;
+  };
 }

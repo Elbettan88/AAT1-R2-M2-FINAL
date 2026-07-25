@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Fondo oscuro que cubre toda la pantalla. Si el usuario hace clic aquí, se cierra la alerta -->
 <div class="modal-overlay" (click)="cerrarModal.emit()">
   
@@ -36,4 +37,122 @@
   </div>
 </div>
 
+=======
+<div class="detail-container">
+  @if (cargando()) {
+    <div class="loading-skeleton">
+      <div class="skeleton-header"></div>
+      <div class="skeleton-body">
+        <div class="skeleton-col"></div>
+        <div class="skeleton-col"></div>
+      </div>
+    </div>
+  } @else if (error() || !pais()) {
+    <div class="error-view">
+      <h2>No se pudo cargar la información del país</h2>
+      <p>Ocurrió un error al consumir los datos del servidor. Por favor, intenta de nuevo.</p>
+      <button class="btn btn-primary" (click)="volver()">Volver a la lista</button>
+    </div>
+  } @else {
+    <div class="detail-card">
+      <div class="detail-hero">
+        <button class="btn-back" (click)="volver()">
+          <span class="back-arrow-svg"></span>
+          Volver a la lista
+        </button>
+        <div class="hero-flag">
+          <img [src]="pais()?.flag?.url_svg" [alt]="pais()?.names?.common" />
+        </div>
+        <div class="hero-title">
+          <h1>{{ pais()?.names?.common }}</h1>
+          <p class="official-name">{{ pais()?.names?.official }}</p>
+        </div>
+      </div>
+>>>>>>> 1c516113e914458aa81cc7855100bf2f627881d4
 
+      <div class="detail-grid">
+        <div class="info-section">
+          <h2>Información Geográfica</h2>
+          <div class="info-row">
+            <span class="label">Región</span>
+            <span class="value">{{ pais()?.region }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Subregión</span>
+            <span class="value">{{ pais()?.subregion || '—' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Capital</span>
+            <span class="value">{{ pais()?.capitals?.[0]?.name || '—' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Área</span>
+            <span class="value">{{ formatNumber(pais()?.area?.kilometers || 0) }} km²</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Continente</span>
+            <span class="value">{{ pais()?.continents?.[0] }}</span>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h2>Datos Demográficos y Culturales</h2>
+          <div class="info-row">
+            <span class="label">Población</span>
+            <span class="value">{{ formatNumber(pais()?.population || 0) }} habitantes</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Idiomas</span>
+            <div class="chips-container">
+              @for (lang of pais()?.languages; track lang.name) {
+                <span class="badge-chip">{{ lang.name }}</span>
+              } @empty {
+                <span class="value">—</span>
+              }
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="label">Moneda</span>
+            <div class="chips-container">
+              @for (curr of pais()?.currencies; track curr.code) {
+                <span class="badge-chip secondary">{{ curr.name }} ({{ curr.symbol }})</span>
+              } @empty {
+                <span class="value">—</span>
+              }
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="label">Miembro de la ONU</span>
+            <span class="value">{{ pais()?.classification?.un_member ? 'Sí' : 'No' }}</span>
+          </div>
+        </div>
+      </div>
+
+      @if (pais()?.borders && (pais()?.borders?.length ?? 0) > 0) {
+        <div class="borders-section">
+          <h2>Países Limítrofes</h2>
+          <div class="borders-grid">
+            @for (border of pais()?.borders; track border.alpha_3) {
+              <a [routerLink]="['/pais', border.common]" class="border-card">
+                <span>{{ border.common }}</span>
+              </a>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="detail-actions">
+        @if (pais()?.links?.google_maps) {
+          <a [href]="pais()?.links?.google_maps" target="_blank" class="btn btn-maps">
+            Ver en Google Maps
+          </a>
+        }
+        @if (pais()?.links?.wikipedia) {
+          <a [href]="pais()?.links?.wikipedia" target="_blank" class="btn btn-wiki">
+            Leer en Wikipedia
+          </a>
+        }
+      </div>
+    </div>
+  }
+</div>

@@ -1,6 +1,5 @@
 /* ============================================================
    HOME PAGE - EXPLORADOR DE PAÍSES
-   Colores básicos: azul, rojo, amarillo, verde
    ============================================================ */
 
 .home-container {
@@ -94,9 +93,7 @@
   color: #1a1a1a;
 }
 
-.btn-primary:hover {
-  background: #f8b400;
-}
+.btn-primary:hover { background: #f8b400; }
 
 .btn-secondary {
   background: transparent;
@@ -120,9 +117,7 @@
   gap: 40px;
 }
 
-.stat {
-  text-align: center;
-}
+.stat { text-align: center; }
 
 .stat-number {
   display: block;
@@ -138,7 +133,7 @@
   letter-spacing: 1px;
 }
 
-/* Globe animation */
+/* ---- GLOBE ANIMATION ---- */
 .hero-image {
   z-index: 1;
   flex-shrink: 0;
@@ -153,14 +148,23 @@
   justify-content: center;
 }
 
-.globe {
-  font-size: 120px;
+/* Clase real usada en el HTML */
+.globe-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #60a5fa, #1d4ed8 55%, #1e3a8a);
+  box-shadow:
+    inset -8px -8px 16px rgba(0,0,0,0.3),
+    0 0 0 3px rgba(255,255,255,0.2),
+    0 12px 40px rgba(0,0,0,0.3);
   animation: globeSpin 20s linear infinite;
+  flex-shrink: 0;
 }
 
 @keyframes globeSpin {
   from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  to   { transform: rotate(360deg); }
 }
 
 .orbit {
@@ -177,84 +181,14 @@
   font-size: 28px;
 }
 
-.orbit-1 { width: 200px; height: 200px; animation-duration: 8s; top: 50%; left: 50%; margin: -100px; }
+.orbit-1 { width: 200px; height: 200px; animation-duration: 8s;  top: 50%; left: 50%; margin: -100px; }
 .orbit-2 { width: 240px; height: 240px; animation-duration: 12s; animation-direction: reverse; top: 50%; left: 50%; margin: -120px; }
-.orbit-3 { width: 170px; height: 170px; animation-duration: 6s; top: 50%; left: 50%; margin: -85px; }
+.orbit-3 { width: 170px; height: 170px; animation-duration: 6s;  top: 50%; left: 50%; margin: -85px; }
 .orbit-4 { width: 260px; height: 260px; animation-duration: 15s; top: 50%; left: 50%; margin: -130px; }
 
 @keyframes orbitAnim {
   from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* ---- SEARCH SECTION ---- */
-.search-section {
-  background: #f4f6fb;
-  padding: 60px;
-  text-align: center;
-  border-bottom: 1px solid #e0e4ef;
-}
-
-.search-section h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1a1a2e;
-  margin-bottom: 8px;
-}
-
-.search-section p {
-  color: #666;
-  margin-bottom: 28px;
-  font-size: 16px;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  max-width: 620px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 50px;
-  padding: 8px 8px 8px 20px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
-  border: 2px solid #e0e4ef;
-  transition: border-color 0.3s;
-}
-
-.search-bar:focus-within {
-  border-color: #1a73e8;
-}
-
-.search-icon {
-  font-size: 18px;
-  margin-right: 12px;
-  opacity: 0.5;
-}
-
-.search-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  color: #222;
-  background: transparent;
-}
-
-.search-btn {
-  background: #1a73e8;
-  color: white;
-  border: none;
-  border-radius: 40px;
-  padding: 12px 28px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.search-btn:hover {
-  background: #1557b0;
-  transform: scale(1.03);
+  to   { transform: rotate(360deg); }
 }
 
 /* ---- REGIONS SECTION ---- */
@@ -289,11 +223,16 @@
   background: white;
   border: 2px solid #e0e4ef;
   border-radius: 16px;
-  padding: 28px 20px;
+  padding: 0;
   cursor: pointer;
   transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
   position: relative;
   text-align: center;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .region-card:hover {
@@ -302,22 +241,44 @@
   box-shadow: 0 8px 24px rgba(26, 115, 232, 0.15);
 }
 
-.region-icon {
-  font-size: 40px;
-  margin-bottom: 12px;
+/* Imagen de fondo por región */
+.region-image-container {
+  width: 100%;
+  height: 110px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.region-image-container.Africa {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
+}
+.region-image-container.Americas {
+  background: linear-gradient(135deg, #10b981 0%, #065f46 100%);
+}
+.region-image-container.Asia {
+  background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+}
+.region-image-container.Europe {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+}
+.region-image-container.Oceania {
+  background: linear-gradient(135deg, #06b6d4 0%, #0e7490 100%);
 }
 
 .region-card h3 {
   font-size: 16px;
   font-weight: 700;
-  margin: 0 0 4px 0;
+  margin: 12px 0 4px 0;
   color: #1a1a2e;
+  padding: 0 16px;
 }
 
 .region-card p {
   font-size: 13px;
   color: #888;
-  margin: 0;
+  margin: 0 0 16px 0;
+  padding: 0 16px;
 }
 
 .region-arrow {
@@ -325,12 +286,12 @@
   top: 12px;
   right: 16px;
   font-size: 16px;
-  color: #ccc;
+  color: rgba(255,255,255,0.8);
   transition: color 0.2s, transform 0.2s;
 }
 
 .region-card:hover .region-arrow {
-  color: #1a73e8;
+  color: white;
   transform: translateX(4px);
 }
 
@@ -366,6 +327,9 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .country-card:hover {
@@ -441,9 +405,7 @@
   margin-top: 12px;
 }
 
-.country-link:hover {
-  text-decoration: underline;
-}
+.country-link:hover { text-decoration: underline; }
 
 /* ---- CURIOSITIES ---- */
 .curiosities-section {
@@ -469,10 +431,12 @@
 
 .curiosity-card {
   border-radius: 16px;
-  padding: 32px 24px;
+  overflow: hidden;
   text-align: center;
   color: white;
   transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 
 .curiosity-card:hover {
@@ -484,9 +448,34 @@
 .curiosity-yellow { background: #f9a825; color: #1a1a1a; }
 .curiosity-green { background: #2e7d32; }
 
-.curiosity-icon {
-  font-size: 40px;
-  margin-bottom: 16px;
+/* Imágenes de curiosidades — gradientes representativos */
+.curiosity-img {
+  width: 100%;
+  height: 130px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.curiosity-img.mount-everest {
+  background: linear-gradient(to bottom, #b2d8f5 0%, #8ab4cc 40%, #c9cba3 70%, #ffffff 100%);
+}
+
+.curiosity-img.russia-map {
+  background: linear-gradient(135deg, #1a3a5c 0%, #2c5282 40%, #2b4162 70%, #12263a 100%);
+}
+
+.curiosity-img.population-india {
+  background: linear-gradient(135deg, #ff9933 0%, #ffffff 40%, #138808 70%, #000080 100%);
+}
+
+.curiosity-img.australia-ocean {
+  background: linear-gradient(to bottom, #56b4e9 0%, #0072b2 40%, #1a6fa3 70%, #0a4b6e 100%);
+}
+
+.curiosity-content {
+  padding: 20px 20px 28px;
+  flex: 1;
 }
 
 .curiosity-card p {
@@ -529,7 +518,6 @@
   .hero-stats { justify-content: center; flex-wrap: wrap; gap: 24px; }
   .hero-image { display: none; }
 
-  .search-section,
   .regions-section,
   .featured-section,
   .curiosities-section,

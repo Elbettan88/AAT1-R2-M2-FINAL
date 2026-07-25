@@ -5,12 +5,12 @@
   </div>
 } @else if (error()) {
   <div class="error">
-    <p>⚠️ No se encontraron resultados.</p>
+    <p>No se encontraron resultados.</p>
   </div>
 } @else {
   <p class="results-count">{{ paises().length }} países encontrados</p>
   <div class="grid">
-    @for (pais of paises(); track pais.cca3) {
+    @for (pais of paises(); track pais.codes.alpha_3) {
       <app-tarjeta-de-paises [pais]="pais" />
     }
   </div>

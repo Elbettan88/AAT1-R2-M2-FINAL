@@ -60,7 +60,8 @@
               "buildTarget": "aat1:build:production"
             },
             "development": {
-              "buildTarget": "aat1:build:development"
+              "buildTarget": "aat1:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

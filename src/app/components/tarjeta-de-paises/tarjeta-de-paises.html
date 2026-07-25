@@ -2,18 +2,18 @@
   <!-- El clic en toda la tarjeta también abre el detalle si el usuario lo desea -->
   <div class="card" (click)="verDetalles()">
     <div class="card-flag">
-      <img [src]="pais.flags.png" [alt]="pais.flags.alt || pais.name.common" />
+      <img [src]="pais.flag.url_png" [alt]="pais.names.common" />
     </div>
     <div class="card-body">
-      <h3 class="card-name">{{ pais.name.common }}</h3>
-      <p><span class="label">Capital:</span> {{ pais.capital?.[0] ?? '—' }}</p>
+      <h3 class="card-name">{{ pais.names.common }}</h3>
+      <p><span class="label">Capital:</span> {{ pais.capitals?.[0]?.name ?? '—' }}</p>
       <p><span class="label">Región:</span> {{ pais.region }}</p>
       <p><span class="label">Población:</span> {{ formatPoblacion(pais.population) }}</p>
     </div>
     <div class="card-footer">
       <!-- El $event.stopPropagation() previene que el evento 'click' se ejecute dos veces (en el botón y en la tarjeta) -->
       <button class="btn-detalles" (click)="verDetalles(); $event.stopPropagation()">
-        Ver detalles →
+        Ver detalles
       </button>
     </div>
   </div>

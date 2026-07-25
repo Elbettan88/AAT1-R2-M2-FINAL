@@ -25,8 +25,16 @@ export class ListaDePaises implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    // Reaccionar cuando cambia la búsqueda o la región (pero no en el primer cambio)
     if (changes['busqueda'] && !changes['busqueda'].firstChange) {
       this.buscar();
+    }
+    if (changes['region'] && !changes['region'].firstChange) {
+      if (this.region) {
+        this.filtrarPorRegion();
+      } else {
+        this.cargarPaises();
+      }
     }
   }
 
@@ -35,7 +43,7 @@ export class ListaDePaises implements OnInit, OnChanges {
     this.error.set(false);
     this.servicio.getTodos().subscribe({
       next: (data) => {
-        this.paises.set(data.sort((a, b) => a.name.common.localeCompare(b.name.common)));
+        this.paises.set(data.sort((a, b) => a.names.common.localeCompare(b.names.common)));
         this.cargando.set(false);
       },
       error: () => {
@@ -59,6 +67,22 @@ export class ListaDePaises implements OnInit, OnChanges {
       },
       error: () => {
         this.paises.set([]);
+        this.error.set(true);
+        this.cargando.set(false);
+      },
+    });
+  }
+
+  filtrarPorRegion() {
+    this.cargando.set(true);
+    this.error.set(false);
+    this.servicio.buscarPorRegion(this.region).subscribe({
+      next: (data) => {
+        this.paises.set(data.sort((a, b) => a.names.common.localeCompare(b.names.common)));
+        this.cargando.set(false);
+      },
+      error: () => {
+        this.error.set(true);
         this.cargando.set(false);
       },
     });
