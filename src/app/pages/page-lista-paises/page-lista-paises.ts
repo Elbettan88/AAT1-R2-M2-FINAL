@@ -1,6 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ListaDePaises } from '../../components/lista-de-paises/lista-de-paises';
 import { FormsModule } from '@angular/forms';
+import { ServicioPaises } from '../../services/servicio-paises';
+import { ModeloPaises } from '../../models/modelo-paises';
 
 @Component({
   selector: 'app-page-lista-paises',
@@ -20,4 +22,6 @@ export class PageListaPaises {
     this.termino = '';
     this.busquedaActiva.set('');
   }
+
+
 }

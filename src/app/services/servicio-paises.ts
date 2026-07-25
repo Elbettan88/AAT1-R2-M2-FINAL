@@ -20,22 +20,43 @@ interface ApiV5Response {
 export class ServicioPaises {
   private http = inject(HttpClient);
   private apiUrl = '/api/countries/v5';
-  private token = 'rc_live_0f9a757f945c4fab9ae7163df3179793';
+  private token = 'rc_live_5e204e0a7f9547ff93e6f3c254ae6f37';
 
   private getHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`
-    });
-  }
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${this.token}`
+  });
 
-  getTodos(): Observable<ModeloPaises[]> {
+  console.log('Authorization:', headers.get('Authorization'));
+
+  return headers;
+}
+/* private getHeaders(): HttpHeaders {
+  return new HttpHeaders({
+    'Authorization': 'Bearer rc_live_5e204e0a7f9547ff93e6f3c254ae6f37',
+    'Content-Type': 'application/json'
+  });
+} */
+
+  /* getTodos(): Observable<ModeloPaises[]> {
     return this.http.get<ApiV5Response>(
-      `${this.apiUrl}?limit=250&fields=names,capitals,region,population,flag,codes`,
+      `${this.apiUrl}?limit=250&response_fields=names,capitals,region,population,flag,codes`,
       { headers: this.getHeaders() }
     ).pipe(
       map(res => res.data.objects)
     );
-  }
+  } */
+ 
+  getTodos(): Observable<ModeloPaises[]> {
+  console.log(this.getHeaders());
+
+  return this.http.get<ApiV5Response>(
+    `${this.apiUrl}?limit=100&response_fields=names,capitals,region,population,flag,codes`,
+    { headers: this.getHeaders() }
+  ).pipe(
+    map(res => res.data.objects)
+  );
+}
 
   buscarPorNombre(nombre: string): Observable<ModeloPaises[]> {
     return this.http.get<ApiV5Response>(
@@ -48,7 +69,7 @@ export class ServicioPaises {
 
   buscarPorRegion(region: string): Observable<ModeloPaises[]> {
     return this.http.get<ApiV5Response>(
-      `${this.apiUrl}?region=${encodeURIComponent(region)}&limit=250&fields=names,capitals,region,population,flag,codes`,
+      `${this.apiUrl}?region=${encodeURIComponent(region)}&limit=100&fields=names,capitals,region,population,flag,codes`,
       { headers: this.getHeaders() }
     ).pipe(
       map(res => res.data.objects)

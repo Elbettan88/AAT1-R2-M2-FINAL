@@ -5,6 +5,9 @@
     "changeOrigin": true,
     "pathRewrite": {
       "^/api": ""
+    },
+    "headers": {
+      "Authorization": "Bearer rc_live_5e204e0a7f9547ff93e6f3c254ae6f37"
     }
   }
 }
