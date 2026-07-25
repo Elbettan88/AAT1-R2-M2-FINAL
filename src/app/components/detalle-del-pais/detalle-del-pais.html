@@ -1,43 +1,3 @@
-<<<<<<< HEAD
-<!-- Fondo oscuro que cubre toda la pantalla. Si el usuario hace clic aquí, se cierra la alerta -->
-<div class="modal-overlay" (click)="cerrarModal.emit()">
-  
-  <!-- Ventana blanca o contenedor del contenido. 
-       El $event.stopPropagation() evita que el modal se cierre si el usuario hace clic adentro de la caja de información -->
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    
-    <header class="modal-header">
-      <!-- Mostramos el nombre común del país de forma segura usando el operador de navegación segura (?) -->
-      <h2>{{ paisSeleccionado?.name?.common }}</h2>
-      <!-- Botón de la esquina para cerrar la alerta -->
-      <button class="btn-close" (click)="cerrarModal.emit()">×</button>
-    </header>
-
-    <div class="modal-body">
-      <!-- Sección de Imágenes: Bandera y Escudo -->
-      <div class="modal-images">
-        <img [src]="paisSeleccionado?.flags?.png" [alt]="paisSeleccionado?.flags?.alt" class="modal-flag" />
-        
-        <!-- Renderizado condicional moderno: Solo dibuja el escudo si el país cuenta con uno en la API -->
-        @if (paisSeleccionado?.coatOfArms?.png) {
-          <img [src]="paisSeleccionado?.coatOfArms?.png" alt="Escudo de Armas" class="modal-shield" />
-        }
-      </div>
-
-      <!-- Datos Extendidos del País obtenidos desde el objeto inyectado -->
-      <div class="modal-info">
-        <p><strong>Nombre Oficial:</strong> {{ paisSeleccionado?.name?.official }}</p>
-        <p><strong>Subregión:</strong> {{ paisSeleccionado?.subregion ?? '—' }}</p>
-        <p><strong>Capital:</strong> {{ paisSeleccionado?.capital?.[0] ?? '—' }}</p>
-        <p><strong>Región:</strong> {{ paisSeleccionado?.region }}</p>
-        <p><strong>Continente:</strong> {{ paisSeleccionado?.continents?.[0] ?? '—' }}</p>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-=======
 <div class="detail-container">
   @if (cargando()) {
     <div class="loading-skeleton">
@@ -68,7 +28,6 @@
           <p class="official-name">{{ pais()?.names?.official }}</p>
         </div>
       </div>
->>>>>>> 1c516113e914458aa81cc7855100bf2f627881d4
 
       <div class="detail-grid">
         <div class="info-section">

@@ -1,13 +1,11 @@
 import { Component, inject, Input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
-// 📌 CORRECCIÓN: Quitamos la 'TT' inicial para importar el nombre real de la clase
-import { TarjetaDePaisesComponent } from '../tarjeta-de-paises/tarjeta-de-paises';
+import { TarjetaDePaises } from '../tarjeta-de-paises/tarjeta-de-paises';
 import { ServicioPaises } from '../../services/servicio-paises';
 import { ModeloPaises } from '../../models/modelo-paises';
 
 @Component({
   selector: 'app-lista-de-paises',
-  standalone: true, // Asegura la compatibilidad con la arquitectura standalone de tu proyecto
-  imports: [TarjetaDePaisesComponent], // 📌 Ahora el nombre aquí coincide exactamente con la importación de arriba
+  imports: [TarjetaDePaises],
   templateUrl: './lista-de-paises.html',
   styleUrl: './lista-de-paises.css',
 })
