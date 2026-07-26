@@ -69,9 +69,31 @@
   background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80');
 }
 
-.team-photo-placeholder.default-male {
+.team-photo-placeholder.default-malea {
   background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80');
 }
+
+.team-photo-placeholder.default-maleb {
+  background-image: url('https://techunting.net/wp-content/uploads/2025/06/Screenshot-2025-06-18-at-11.56.41.png');
+}
+
+.team-photo-placeholder.default-malec {
+  background-image: url('https://www.consultancy.nl/illustrations/news/detail/2025-07-30-120541666-AI_Engineer.jpg');
+}
+
+.team-photo-placeholder.default-maled {
+  background-image: url('https://tbcdn.talentbrew.com/company/20539/v3_0/img/info-it-software-jd-hero-img.webp');
+}
+
+.team-photo-placeholder.default-malee {
+  background-image: url('https://www.simplilearn.com/ice9/free_resources_article_thumb/Full_stack_developer_salary.jpg');
+}
+
+.team-photo-placeholder.default-malef {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRORBm1v1U-XXZ97_QWp7MCDJpIULFoO-enon-uj06Aq4jizXmSoBgSAhk&s=10');
+}
+
+
 
 .team-card h3 { font-size: 15px; font-weight: 700; margin: 0 0 4px; color: #1a1a2e; }
 .team-card p { font-size: 12px; color: #888; margin: 0; }
