@@ -5,9 +5,41 @@
       <span class="brand-name">WorldExplorer</span>
     </a>
   </div>
-  <ul class="navbar-links">
-    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Inicio</a></li>
-    <li><a routerLink="/lista-paises" routerLinkActive="active">Países</a></li>
-    <li><a routerLink="/acerca-de" routerLinkActive="active">Acerca de</a></li>
+  <!-- Botón hamburguesa -->
+  <button class="menu-toggle" (click)="menuAbierto = !menuAbierto">
+    ☰
+  </button>
+
+  <ul class="navbar-links" [class.active]="menuAbierto">
+    <li>
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="menuAbierto = false"
+      >
+        Inicio
+      </a>
+    </li>
+
+    <li>
+      <a
+        routerLink="/lista-paises"
+        routerLinkActive="active"
+        (click)="menuAbierto = false"
+      >
+        Países
+      </a>
+    </li>
+
+    <li>
+      <a
+        routerLink="/acerca-de"
+        routerLinkActive="active"
+        (click)="menuAbierto = false"
+      >
+        Acerca de
+      </a>
+    </li>
   </ul>
 </nav>
